@@ -1,10 +1,10 @@
 FROM xieguochao/code-server:1.0
 
 USER root
-# RUN cp /etc/apt/sources.list /etc/apt/sources.backup.list
+RUN cp /etc/apt/sources.list /etc/apt/sources.backup.list
 
 # Please comment this line if you are not using Tencent Cloud network
-COPY sources.list /etc/apt/sources.list
+# COPY sources.list /etc/apt/sources.list
 
 RUN apt-get update
 
