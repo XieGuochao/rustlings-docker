@@ -15,6 +15,15 @@ RUN sh ~/rustup-init.sh -y
 # Rust
 RUN code-server --install-extension rust-lang.rust
 
+# Rustlings
+ENV PATH="/home/codeserver/.cargo/bin:${PATH}"
+RUN cd ~ && git clone https://github.com/rust-lang/rustlings
+RUN cd ~/rustlings && git switch -c tags/4.4.0 
+ADD proxy-config ~/.cargo/config.toml
+RUN cd ~/rustlings && cargo install --force --path .
+
+RUN rustup component add rls rust-analysis rust-src
+
 USER root
 RUN cp /etc/apt/sources.list /etc/apt/sources-tencent.list
 RUN mv /etc/apt/sources.backup.list /etc/apt/sources.list
